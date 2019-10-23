@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29418.71
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactBurgerBuilder", "ReactBurgerBuilder\ReactBurgerBuilder.csproj", "{DBC5EB16-C2A8-4B69-B9BE-6C4407E04B0F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBC5EB16-C2A8-4B69-B9BE-6C4407E04B0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBC5EB16-C2A8-4B69-B9BE-6C4407E04B0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBC5EB16-C2A8-4B69-B9BE-6C4407E04B0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBC5EB16-C2A8-4B69-B9BE-6C4407E04B0F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59C713B2-EE1D-417D-BD29-7E94B49AAC0B}
+	EndGlobalSection
+EndGlobal
