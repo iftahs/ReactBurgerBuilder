@@ -12,6 +12,7 @@ namespace ReactBurgerBuilder.Models
         public int customerId { get; set; }
         public string name { get; set; }
         public string email { get; set; }
+        public int addressId { get; set; }
         public Address address { get; set; }
     }
 }

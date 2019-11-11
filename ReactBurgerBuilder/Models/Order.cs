@@ -8,8 +8,9 @@ namespace ReactBurgerBuilder.Models
 {
     public class Order
     {
-        public ICollection<Ingreident> ingredients { get; set; }
+        public List<Ingreident> ingredients { get; set; }
         public double totalPrice { get; set; }
+        public int customerId { get; set; }
         public Customer customer { get; set; }
         public string deliveryMethod { get; set; }
         [Key]

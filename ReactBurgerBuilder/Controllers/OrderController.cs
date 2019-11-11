@@ -9,6 +9,7 @@ using System.Text.Json;
 using ReactBurgerBuilder.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
+using Newtonsoft.Json;
 
 namespace ReactBurgerBuilder.Controllers
 {
@@ -18,6 +19,7 @@ namespace ReactBurgerBuilder.Controllers
 
     {
         public DataContext db = new DataContext();
+
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
@@ -31,7 +33,36 @@ namespace ReactBurgerBuilder.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
 
-            return Ok();
+            return Ok(order);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<Order[]>> GetOrders()
+        {
+            Order[] orders = null;
+
+            try
+            {
+                await Task.Run(() =>
+                {
+                    orders = db.Orders.ToArray<Order>();
+
+                    foreach (Order o in orders)
+                    {
+                        Customer c = db.Clients.Find(o.customerId);
+                        c.address = db.Addresses.Find(c.addressId);
+                        o.customer = c;
+                        
+                        o.ingredients = db.Ingreidents.Where(ing => ing.orderId == o.id).ToList<Ingreident>();
+                    }
+                });
+
+                return orders;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
