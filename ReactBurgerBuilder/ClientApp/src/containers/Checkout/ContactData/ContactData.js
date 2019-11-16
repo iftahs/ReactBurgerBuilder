@@ -109,13 +109,6 @@ class ContactData extends Component {
     orderHandler = (event) => {
         event.preventDefault();
 
-        const orderIngs = Object.keys(this.props.ingredients).map(key => {
-            return {
-                name: key,
-                amount: this.props.ingredients[key]
-            };
-        });
-
         const formData = {};
         for (let formElementId in this.state.orderForm) {
             formData[formElementId] = this.state.orderForm[formElementId].value;
@@ -133,13 +126,13 @@ class ContactData extends Component {
         }
 
         const order = {
-            ingredients: orderIngs,
+            ingredients: this.props.ingredients,
             totalPrice: parseFloat((+this.props.price).toFixed(2)),
             customer: customer,
             deliveryMethod: formData['deliveryMethod']
         };
 
-        this.props.onOrderBurger(order);
+        this.props.onOrderBurger(order, this.props.token);
     }
 
     checkValidity(value, rules) {
@@ -220,13 +213,14 @@ const mapStateToProps = state => {
     return {
         ingredients: state.burderBuilder.ingredients,
         price: state.burderBuilder.totalPrice,
-        loading: state.order.loading
+        loading: state.order.loading,
+        token: state.auth.token
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
+        onOrderBurger: (orderData, token) => dispatch(actions.purchaseBurger(orderData, token))
     };
 }
 

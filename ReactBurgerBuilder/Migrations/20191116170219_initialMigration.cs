@@ -2,7 +2,7 @@
 
 namespace ReactBurgerBuilder.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,7 +30,7 @@ namespace ReactBurgerBuilder.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(nullable: true),
                     email = table.Column<string>(nullable: true),
-                    addressId = table.Column<int>(nullable: true)
+                    addressId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,7 +40,7 @@ namespace ReactBurgerBuilder.Migrations
                         column: x => x.addressId,
                         principalTable: "Addresses",
                         principalColumn: "addressId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,7 +50,7 @@ namespace ReactBurgerBuilder.Migrations
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     totalPrice = table.Column<double>(nullable: false),
-                    customerId = table.Column<int>(nullable: true),
+                    customerId = table.Column<int>(nullable: false),
                     deliveryMethod = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -61,7 +61,7 @@ namespace ReactBurgerBuilder.Migrations
                         column: x => x.customerId,
                         principalTable: "Clients",
                         principalColumn: "customerId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

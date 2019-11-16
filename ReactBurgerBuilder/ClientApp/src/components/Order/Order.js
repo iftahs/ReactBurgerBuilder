@@ -2,7 +2,17 @@
 import classes from './Order.css';
 
 const order = (props) => {
-    const ingredients = props.ingredients.map(ingredient => (
+    const ingredients = [];
+
+    for (let ingredientName in props.ingredients) {
+        ingredients.push({
+            id: ingredientName,
+            name: ingredientName,
+            amount: props.ingredients[ingredientName]
+        });
+    }
+
+    const ingredientsOutput = ingredients.map(ingredient => (
         <li
             key={ingredient.id}
             style={{
@@ -18,7 +28,7 @@ const order = (props) => {
         <div className={classes.Order}>
             <p>Ingredients:</p>
             <ul>
-                {ingredients}
+                {ingredientsOutput}
             </ul>
             <p>Price: <strong>{props.totalPrice}$</strong></p>
         </div>

@@ -25,6 +25,10 @@ namespace ReactBurgerBuilder
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnectionString")));
+
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory

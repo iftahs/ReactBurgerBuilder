@@ -14,11 +14,9 @@ namespace ReactBurgerBuilder.Data
         public DbSet<Ingreident> Ingreidents { get; set; }
         public DbSet<Address> Addresses { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public DataContext(DbContextOptions options) : base(options)
         {
-            optionsBuilder.UseSqlServer("Data Source=IFTAHPC;Initial Catalog=BurgerApp;Integrated Security=True");
+
         }
-
-
     }
 }

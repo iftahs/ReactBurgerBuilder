@@ -18,15 +18,20 @@ namespace ReactBurgerBuilder.Controllers
     public class OrderController : ControllerBase
 
     {
-        public DataContext db = new DataContext();
+        DataContext _context;
+
+        public OrderController(DataContext context)
+        {
+            _context = context;
+        }
 
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
             try
             {
-                db.Orders.Add(order);
-                await db.SaveChangesAsync();
+                _context.Orders.Add(order);
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -45,15 +50,15 @@ namespace ReactBurgerBuilder.Controllers
             {
                 await Task.Run(() =>
                 {
-                    orders = db.Orders.ToArray<Order>();
+                    orders = _context.Orders.ToArray<Order>();
 
                     foreach (Order o in orders)
                     {
-                        Customer c = db.Clients.Find(o.customerId);
-                        c.address = db.Addresses.Find(c.addressId);
+                        Customer c = _context.Clients.Find(o.customerId);
+                        c.address = _context.Addresses.Find(c.addressId);
                         o.customer = c;
                         
-                        o.ingredients = db.Ingreidents.Where(ing => ing.orderId == o.id).ToList<Ingreident>();
+                        o.ingredients = _context.Ingreidents.Where(ing => ing.orderId == o.id).ToList<Ingreident>();
                     }
                 });
 
